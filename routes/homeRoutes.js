@@ -4,7 +4,8 @@ const paintingController = require('../controllers/paintingController');
 const withAuth = require('../utils/auth');
 
 // route to create/add a home using async/await
-router.get('/', galleryController.getGalleries);
+// router.get('/', galleryController.getGalleries);
+router.get('/',(req, res) => res.render('homepage'));
 router.get('/gallery/:id', withAuth, galleryController.getSingleGallery);
 router.get('/painting/:id', withAuth, paintingController.getSinglePainting);
 
