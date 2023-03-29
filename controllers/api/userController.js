@@ -1,82 +1,77 @@
-const router = require('express').Router();
 const { User } = require('../../models');
 
-// Login route
-exports.getLoginPage = ('/login', (req, res) => {
-  // If the user is already logged in, redirect to the homepage
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-  // Otherwise, render the 'login' template
-  res.render('login');
-});
 
+// Create a new user
 exports.createUser = async (req, res) => {
-  try {
-    const dbUserData = await User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    });
+	try {
+		const dbUserData = await User.create({
+			fname: req.body.fname,
+			lname: req.body.lname,
+			username: req.body.username,
+			email: req.body.email,
+			password: req.body.password,
+		});
 
-    req.session.save(() => {
-      req.session.loggedIn = true;
-
-      res.status(200).json(dbUserData);
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+		req.session.save(() => {
+			req.session.loggedIn = true;
+			res.status(200).json(dbUserData);
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err.errors[0].message);
+	}
 };
 
-// Login
+// Login a user
 exports.loginUser = async (req, res) => {
-  try {
-    const dbUserData = await User.findOne({
-      where: {
-        email: req.body.email,
-      },
-    });
+	try {
+		const dbUserData = await User.findOne({
+			where: {
+				username: req.body.username,
+			},
+		});
 
-    if (!dbUserData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
-    }
+		if (!dbUserData) {
+			res
+				.status(400)
+				.json({ message: "Incorrect username or password. Please try again!" });
+			return;
+		}
 
-    const validPassword = await dbUserData.checkPassword(req.body.password);
+		console.log(req.body.password + dbUserData.password);
+		const validPassword = await dbUserData.checkPassword(req.body.password);
+		if (!validPassword) {
+			res
+				.status(400)
+				.json({ message: "Incorrect username or password. Please try again!" });
+			return;
+		}
 
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
-    }
-
-    req.session.save(() => {
-      req.session.loggedIn = true;
-
-      res
-        .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+		req.session.save(() => {
+			req.session.loggedIn = true;
+			req.session.user = dbUserData;
+			res
+				.status(200)
+				.json({ user: dbUserData, message: "You are now logged in!" });
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
 };
 
-// Logout
+// Logout a user
 exports.logOutUser = (req, res) => {
-  // When the user logs out, the session is destroyed
-  if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+			console.log("Logged out");
+			res.redirect("/");
+        });
+    } else {
+		res.status(404).end();
+		return;
+    }
 };
+
+
+

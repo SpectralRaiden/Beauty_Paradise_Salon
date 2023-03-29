@@ -1,4 +1,4 @@
-// const User = require('./User');
+const User = require('./User');
 // const Appointment = require('./Appointment');
 // const Stylist = require("./Stylist");
 
@@ -21,6 +21,6 @@
 // // A stylist can have many appointments
 // Stylist.hasMany(Appointment);
 
-// module.exports = { User, Stylist, Appointment };
+module.exports = { User };
 
   

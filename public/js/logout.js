@@ -3,12 +3,13 @@ const logout = async () => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   });
+}
 
-  if (response.ok) {
-    document.location.replace('/');
-  } else {
-    alert('Failed to log out.');
-  }
-};
+function showErrorModal(message) {
+  document.getElementById('errorMessage').innerText = message;
+  $('#errorModal').modal('show');
+}
 
-document.querySelector('#logout').addEventListener('click', logout);
+if (document.querySelector('#logout')) {
+  document.querySelector('#logout').addEventListener('click', logout);
+}
