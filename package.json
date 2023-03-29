@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "museum-paintings",
   "version": "1.0.0",
   "description": "",
@@ -24,4 +25,23 @@
   "devDependencies": {
     "nodemon": "^2.0.22"
   }
+=======
+  "name": "beauty_paradise_salon",
+  "version": "1.0.0",
+  "description": "## **Description**",
+  "main": "(server.js)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpectralRaiden/Beauty_Paradise_Salon.git"
+  },
+  "author": "Jerome, Jacob, Joshua, Christian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpectralRaiden/Beauty_Paradise_Salon/issues"
+  },
+  "homepage": "https://github.com/SpectralRaiden/Beauty_Paradise_Salon#readme"
+>>>>>>> 1812c779419edc3c414847f40647ae0cabc854c8
 }
