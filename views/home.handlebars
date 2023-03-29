@@ -1,0 +1,94 @@
+<nav class="navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <span>Beauty Paradise</span>
+    </a>
+    <div class=" navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a href="/api/users/logout" id="logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section d-flex align-items-center text-center">
+    <div class="container">
+        <div class="container">
+            <h1>Welcome to Beauty Paradise</h1>
+            <p class="lead">Book your salon appointments with ease and convenience</p>
+            <p>Choose from a range of services and staff members to find the perfect fit for your needs</p>
+            <div class="btn-group" >
+                <a class="btn btn_ btn-lg mx-2" href="/stylists" role="button">Stylists</a>
+                <a class="btn btn_ btn-lg mx-2" href="/appointment" role="button">Book One</a>
+            </div>
+        </div>
+        {{!-- two button, for check saloon staff or book an appoinntment --}}
+    </div>
+
+</section>
+
+<!-- About Section -->
+<section id="about">
+    <div class="container">
+        <div>
+            <div>
+                <h2>We are Beauty Paradise</h2>
+                <p>At Beauty Paradise, we believe in providing the best salon experience for our customers.
+                    Our experienced staff members are dedicated to providing high-quality services and using only the
+                    best products and equipment to ensure that you receive the best possible results. We offer a wide
+                    range of services to help you look and feel your best, from haircuts and coloring to nail services
+                    and waxing.</p>
+                <a href="#">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Contact Section -->
+<section id="contact">
+    <div class="container">
+        <div>
+            <div>
+                <h2>Contact Us</h2>
+                <p>For any inquiries or appointments, please contact us at:</p>
+                <ul>
+                    <li>
+                        <span> 555-555-5555 </span>
+                    </li>
+                    <li>
+                        <span> info@beautyparadise.com </span>
+                    </li>
+                    <li>
+                        <span> 123 Main Street, Anytown, USA </span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <form>
+            <div>
+                <label for="name">Name</label>
+                <input type="text"  id="name">
+            </div>
+            <div>
+                <label for="email">Email address</label>
+                <input type="email" id="email">
+            </div>
+            <div>
+                <label for="message">Message</label>
+                <textarea  id="message" rows="3"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {{> footer }}
+</section>
