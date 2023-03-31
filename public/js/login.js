@@ -1,25 +1,19 @@
-function showErrorModal(message) {
-  document.getElementById("errorMessage").innerText = message;                    // Set error text
-  $("#errorModal").modal("show");                                                 // Show error modal
-}
-
-
-const loginFormHandler = async (event) => {                                       // Login form handler
+const loginFormHandler = async (event) => {
   event.preventDefault();
 
-  const username = document.querySelector("#username").value.trim();              // Get username
-  const password = document.querySelector("#password").value.trim();              // Get password
+  const username = document.querySelector("#username").value.trim();
+  const password = document.querySelector("#password").value.trim();
 
-  if (username && password) {                                                     // Check inputs                                
-    const response = await fetch("/api/users/login", {                            // Send login request
+  if (username && password) {
+    const response = await fetch("/api/users/login", {
       method: "POST",
-      body: JSON.stringify({ username, password }),                               // JSON body  *
-      headers: { "Content-Type": "application/json" },                            // JSON header
+      body: JSON.stringify({ username, password }),
+      headers: { "Content-Type": "application/json" },
     });
 
-    if (response.ok) {                                                            // If success
-      document.location.replace("/");                                             // Redirect home
-    } else {                                                                      // If fail
+    if (response.ok) {
+      document.location.replace("/");
+    } else {
       // alert('Failed to log in.');
       // Show the error message in a modal
       showErrorModal("Failed to log in.");
@@ -31,18 +25,24 @@ const loginFormHandler = async (event) => {                                     
   }
 };
 
+// Define a function to show the error message in a modal
+function showErrorModal(message) {
+  // Update the content of the modal with the error message
+  document.getElementById("errorMessage").innerText = message;
+  // Show the modal
+  $("#errorModal").modal("show");
+}
 
+const signupFormHandler = async (event) => {
+  event.preventDefault();
 
-const signupFormHandler = async (event) => {                                  // Signup form handler
-  event.preventDefault();                                                     // Prevent refresh
+  const fname = document.querySelector("#firstname").value.trim();
+  const lname = document.querySelector("#lastname").value.trim();
+  const username = document.querySelector("#username").value.trim();
+  const email = document.querySelector("#email").value.trim();
+  const password = document.querySelector("#password").value.trim();
 
-  const fname = document.querySelector("#firstname").value.trim();              // Get first name
-  const lname = document.querySelector("#lastname").value.trim();               // Get last name
-  const username = document.querySelector("#username").value.trim();            // Get username
-  const email = document.querySelector("#email").value.trim();                  // Get email
-  const password = document.querySelector("#password").value.trim();            // Get password
-
-  if (fname && lname && username && email && password) {                         // Check inputs
+  if (fname && lname && username && email && password) {
     const response = await fetch("/api/users/register", {
       method: "POST",
       body: JSON.stringify({ fname, lname, username, email, password }),
