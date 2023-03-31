@@ -3,3 +3,16 @@
 	background: url("/images/login.png") no-repeat center center fixed;
 	background-size: cover;
 }
+
+p, h1, h2, h3 {
+	color: rgb(255, 255, 255);
+}
+
+.container {
+	color: rgb(255, 255, 255);
+
+}
+
+.btn {
+	color: rgb(255, 255, 255);
+}

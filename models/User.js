@@ -34,7 +34,7 @@ class User extends Model {
 */
 
 
-User.init(
+User.init(															// Initialize User model
 	{
 		id: {
 			type: DataTypes.INTEGER,
@@ -81,19 +81,14 @@ User.init(
 		},
 	},
 	{
-		// hooks are automatic methods that run during various phases of the User Model lifecycle
+		
 		hooks: {
-			// set up beforeCreate lifecycle "hook" functionality, which will run before a new User is created and saved to the database
+			
 			async beforeCreate(newUserData) {
-				newUserData.password = await bcrypt.hash(newUserData.password, 10);
-				return newUserData;
+				newUserData.password = await bcrypt.hash(newUserData.password, 10);            // Hash password
+				return newUserData;																// Return modified data
 			},
-
-			// set up beforeUpdate lifecycle "hook" functionality, which will run before an existing User is updated and saved to the database
-			async beforeUpdate(updatedUserData) {
-				updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-				return updatedUserData;
-			}
+			
 		},
 
 		sequelize,

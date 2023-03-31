@@ -1,10 +1,10 @@
-const { User } = require('../../models');
+const { User } = require('../../models');										//Import User model
 
 
 // Create a new user
-exports.createUser = async (req, res) => {
+exports.createUser = async (req, res) => {										// Create user function
 	try {
-		const dbUserData = await User.create({
+		const dbUserData = await User.create({									// Create user object
 			fname: req.body.fname,
 			lname: req.body.lname,
 			username: req.body.username,
@@ -12,9 +12,9 @@ exports.createUser = async (req, res) => {
 			password: req.body.password,
 		});
 
-		req.session.save(() => {
+		req.session.save(() => {											   // Save session data: loggedIn true
 			req.session.loggedIn = true;
-			res.status(200).json(dbUserData);
+			res.status(200).json(dbUserData);									// Send user data
 		});
 	} catch (err) {
 		console.log(err);
@@ -23,15 +23,15 @@ exports.createUser = async (req, res) => {
 };
 
 // Login a user
-exports.loginUser = async (req, res) => {
+exports.loginUser = async (req, res) => {										// Login user function
 	try {
-		const dbUserData = await User.findOne({
+		const dbUserData = await User.findOne({									// Find user data
 			where: {
 				username: req.body.username,
 			},
 		});
 
-		if (!dbUserData) {
+		if (!dbUserData) {														// if user doesnt exists
 			res
 				.status(400)
 				.json({ message: "Incorrect username or password. Please try again!" });
@@ -63,7 +63,7 @@ exports.loginUser = async (req, res) => {
 // Logout a user
 exports.logOutUser = (req, res) => {
     if (req.session.loggedIn) {
-        req.session.destroy(() => {
+        req.session.destroy(() => {									// Destroy session
 			console.log("Logged out");
 			res.redirect("/");
         });

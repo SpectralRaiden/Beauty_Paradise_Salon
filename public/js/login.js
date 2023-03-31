@@ -1,36 +1,48 @@
-const loginFormHandler = async (event) => {
+function showErrorModal(message) {
+  document.getElementById("errorMessage").innerText = message;                    // Set error text
+  $("#errorModal").modal("show");                                                 // Show error modal
+}
+
+
+const loginFormHandler = async (event) => {                                       // Login form handler
   event.preventDefault();
 
-  const username = document.querySelector("#username").value.trim();                            // Assigns trimmed username value.
-  const password = document.querySelector("#password").value.trim();                            // Assigns trimmed password value.
+  const username = document.querySelector("#username").value.trim();              // Get username
+  const password = document.querySelector("#password").value.trim();              // Get password
 
-  if (username && password) {                                                                   // Checks login credentials
-    const response = await fetch("/api/users/login", {                                          // Performs a network request.
+  if (username && password) {                                                     // Check inputs                                
+    const response = await fetch("/api/users/login", {                            // Send login request
       method: "POST",
-      body: JSON.stringify({ username, password }),                                             // Converts object to string.
-      headers: { "Content-Type": "application/json" },                                          // Sets Content-Type header of HTTP request to application/json.
+      body: JSON.stringify({ username, password }),                               // JSON body  *
+      headers: { "Content-Type": "application/json" },                            // JSON header
     });
 
-    if (response.ok) {
-      document.location.replace("/");
-    } else {
-      alert('Failed to log in.');                                                                 // Show the error message in a modal
-      
+    if (response.ok) {                                                            // If success
+      document.location.replace("/");                                             // Redirect home
+    } else {                                                                      // If fail
+      // alert('Failed to log in.');
+      // Show the error message in a modal
+      showErrorModal("Failed to log in.");
     }
+  } else {
+    // alert('Please fill out all fields.');
+    // Show the error message in a modal
+    showErrorModal("Please fill out all fields.");
+  }
 };
 
 
 
-const signupFormHandler = async (event) => {
-  event.preventDefault();
+const signupFormHandler = async (event) => {                                  // Signup form handler
+  event.preventDefault();                                                     // Prevent refresh
 
-  const fname = document.querySelector("#firstname").value.trim();
-  const lname = document.querySelector("#lastname").value.trim();
-  const username = document.querySelector("#username").value.trim();
-  const email = document.querySelector("#email").value.trim();
-  const password = document.querySelector("#password").value.trim();
+  const fname = document.querySelector("#firstname").value.trim();              // Get first name
+  const lname = document.querySelector("#lastname").value.trim();               // Get last name
+  const username = document.querySelector("#username").value.trim();            // Get username
+  const email = document.querySelector("#email").value.trim();                  // Get email
+  const password = document.querySelector("#password").value.trim();            // Get password
 
-  if (fname && lname && username && email && password) {
+  if (fname && lname && username && email && password) {                         // Check inputs
     const response = await fetch("/api/users/register", {
       method: "POST",
       body: JSON.stringify({ fname, lname, username, email, password }),
