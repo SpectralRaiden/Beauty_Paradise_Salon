@@ -1,19 +1,19 @@
-const loginFormHandler = async (event) => { // Login handler
-  event.preventDefault(); // Stop refresh
+const loginFormHandler = async (event) => {                         // Login handler
+  event.preventDefault();                                           // Stop refresh
 
-  const username = document.querySelector("#username").value.trim();
-  const password = document.querySelector("#password").value.trim();
+  const username = document.querySelector("#username").value.trim();  // Get username
+  const password = document.querySelector("#password").value.trim();    // Get password
 
-  if (username && password) {
-    const response = await fetch("/api/users/login", {
+  if (username && password) {                                           // Check fields
+    const response = await fetch("/api/users/login", {                  // Fetch login
       method: "POST",
-      body: JSON.stringify({ username, password }),
-      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),                     // JSON body
+      headers: { "Content-Type": "application/json" },                  // Set headers
     });
 
-    if (response.ok) {
-      document.location.replace("/");
-    } else {
+    if (response.ok) {                                                    // On success
+      document.location.replace("/");                                     // Redirect
+    } else {                                                              // Show error
       // alert('Failed to log in.');
       // Show the error message in a modal
       showErrorModal("Failed to log in.");
