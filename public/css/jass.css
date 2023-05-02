@@ -2,6 +2,7 @@
 	height: 100vh;
 	background: url("/images/login.png") no-repeat center center fixed;
 	background-size: cover;
+<<<<<<< HEAD
 }
 
 p, h1, h2, h3 {
@@ -15,4 +16,6 @@ p, h1, h2, h3 {
 
 .btn {
 	color: rgb(255, 255, 255);
+=======
+>>>>>>> 95d6304d0a1a7f277c642ccc005e51bde9a12684
 }

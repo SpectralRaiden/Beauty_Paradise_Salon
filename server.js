@@ -1,14 +1,12 @@
-const path = require('path');
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const helpers = require('./utils/helpers');
 const exphbs = require('express-handlebars');
+const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const routes = require('./routes');
-const sequelize = require('./config/connection');
-const helpers = require('./utils/helpers');
-
-const app = express();
+const app = express(); 
 const PORT = process.env.PORT || 3001;
 
 const sess = {
@@ -30,10 +28,11 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(routes);
+app.use(require('./routes'));
+
+app.use(express.static('./public'));
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+  app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}`));
 });
