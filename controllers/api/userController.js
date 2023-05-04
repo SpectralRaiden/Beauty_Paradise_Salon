@@ -76,7 +76,7 @@ exports.logOutUser = (req, res) => {
 
 
 const router = require('express').Router();
-const { User } = require('../../models');
+// const { User } = require('../../models');
 
 // Login route
 exports.getLoginPage = ('/login', (req, res) => {
