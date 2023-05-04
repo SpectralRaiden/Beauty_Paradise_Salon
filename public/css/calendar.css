@@ -1,9 +1,36 @@
 #calendar {
     display: flex;
     flex-wrap: wrap;
+    width: 80%;
+    margin: 5vh auto;
+    border: 5px solid black;
+    padding: 10px;
+    border-radius: 8px;
+    color: black;
+    background: teal;
 }
 
 .date {
-    width: 25%;
-    border-right: 2px solid #000;
+    width: calc(100%/7);
+    border: 2px solid #000;
+    color: white;
+    height: 100px;
+    padding: 5px;
+}
+
+.date h5 {
+    text-align: center;
+}
+
+.day {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.day input {
+    width: 80%;
+}
+
+.day h1 {
+    text-align: center;
 }
